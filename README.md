@@ -1,6 +1,6 @@
 # ScryfallWrapped
 
-**Disclaimer: This package is in no way endorsed by Scryfall© or Wizards of the Coast.
+**Disclaimer: This package is in no way endorsed by Scryfall© or Wizards of the Coast.**
 
 This is temporary description whilst this package is in progress:
 The intention of this package is to create a comprehensive wrapper around the Scryfall API that simplifies using the API in native Swift.
