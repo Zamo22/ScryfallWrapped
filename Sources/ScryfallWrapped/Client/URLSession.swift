@@ -5,27 +5,33 @@
 import Foundation
 
 public extension URLSession {
-    typealias Handler = (Result<Data, Error>) -> Void
+    typealias Handler<T: Codable> = (Result<T, Error>) -> Void
 
-    private func dataTask(
+    private func dataTask<T: Codable>(
         with url: URL,
-        handler: @escaping Handler
+        expectedType: T.Type,
+        handler: @escaping Handler<T>
     ) -> URLSessionDataTask {
         dataTask(with: url) { data, _, error in
             if let error = error {
                 handler(.failure(error))
             } else {
-                handler(.success(data ?? Data()))
+                if let model = try? JSONDecoder().decode(expectedType, from: data ?? Data()) {
+                    handler(.success(model))
+                }
+
             }
         }
     }
     
     @discardableResult
-    func endpointRequest(
+    func endpointRequest<T: Codable>(
         _ endpoint: Endpoint,
-        then handler: @escaping Handler
+        expectedType: T.Type,
+        then handler: @escaping Handler<T>
     ) -> URLSessionDataTask {
         let task = dataTask(with: endpoint.url,
+                            expectedType: expectedType,
                             handler: handler)
         task.resume()
         return task
