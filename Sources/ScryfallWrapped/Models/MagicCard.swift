@@ -143,9 +143,8 @@ public struct MagicCard: Codable {
     public let rarity: CardRarity
     /// An dictionary providing URIs to this card’s listing on other Magic: The Gathering online resources
     public let relatedUris: [String: String]
-    // TODO: To also check here if date works
     /// The date this card was first released
-    public let dateReleased: Date
+    public let dateReleased: String
     /// True if this card is a reprint
     public let reprint: Bool
     /// A link to this card’s set on Scryfall’s website
@@ -174,9 +173,8 @@ public struct MagicCard: Codable {
     public let securityStamp: SecurityStamp?
     /// This card’s watermark, if any
     public let watermark: String?
-    // TODO: Check date here
     /// The date this card was previewed
-    public let previewDate: Date?
+    public let previewDate: String?
     /// A link to the preview for this card
     public let previewSourceUri: String?
     /// The name of the source that previewed this card

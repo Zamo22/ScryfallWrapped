@@ -11,7 +11,7 @@ public struct Ruling: Codable {
     /// Text of the ruling
     public let comment: String
     /// The date when the ruling or note was published
-    public let datePublished: Date
+    public let datePublished: String
     public let oracleId: String
 
     // MARK: - CodingKeys

@@ -20,10 +20,8 @@ public struct MagicSet: Codable {
     // TODO: Potentially create an enum for this and its counterpart in the card object
     /// A computer-readable classification for this set. Due to the number of different types of sets, no enum was currently created for this
     public let setType: String
-
-    // TODO: Verify if date is getting initialized correctly
     /// The date the set was released or the first card was printed in the set (in GMT-8 Pacific time).
-    public let dateReleased: Date?
+    public let dateReleased: String?
     /// The block code for this set, if any.
     public let blockCode: String?
     /// The block or group name code for this set, if any.
