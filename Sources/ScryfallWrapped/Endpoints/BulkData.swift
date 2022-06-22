@@ -16,8 +16,8 @@ public extension Endpoint {
     }
 
     /// Retrieve bulk data by type
-    static func bulkData(byType type: String) -> Self {
-        Endpoint(path: "\(Constants.Endpoints.BulkData.endpoint)/\(id)")
+    static func bulkData(byType type: BulkDataType) -> Self {
+        Endpoint(path: "\(Constants.Endpoints.BulkData.endpoint)/\(type.rawValue)")
     }
 }
 

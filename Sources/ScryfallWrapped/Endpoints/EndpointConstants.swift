@@ -6,6 +6,8 @@ import Foundation
 
 extension Constants {
     enum Endpoints {
+        static let baseUrl = "api.scryfall.com"
+        
         enum Sets {
             static let endpoint = "sets"
             static let tcgPlayerIdEndpoint = "\(endpoint)/tcgplayer"

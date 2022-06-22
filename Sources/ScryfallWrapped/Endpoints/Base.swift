@@ -13,7 +13,7 @@ public struct Endpoint {
     public var url: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "api.scryfall.com"
+        components.host = Constants.Endpoints.baseUrl
         components.path = "/" + path
         components.queryItems = queryItems
 

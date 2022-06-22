@@ -15,3 +15,12 @@ extension Int {
         String(self)
     }
 }
+
+public protocol CaseIterableDefaultsLast: Codable & CaseIterable & RawRepresentable
+where RawValue: Decodable, AllCases: BidirectionalCollection { }
+
+public extension CaseIterableDefaultsLast {
+    init(from decoder: Decoder) throws {
+        self = try Self(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? Self.allCases.last!
+    }
+}
