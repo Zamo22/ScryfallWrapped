@@ -16,10 +16,14 @@ public extension URLSession {
             if let error = error {
                 handler(.failure(error))
             } else {
-                if let model = try? JSONDecoder().decode(expectedType, from: data ?? Data()) {
+                do {
+                    let model = try JSONDecoder().decode(expectedType, from: data ?? Data())
                     handler(.success(model))
+                } catch {
+                    handler(.failure(error))
                 }
-                handler(.failure(NSError(domain: "test.com", code: 0, userInfo: ["why":"json"])))
+
+
             }
         }
     }
