@@ -19,7 +19,7 @@ public extension URLSession {
                 if let model = try? JSONDecoder().decode(expectedType, from: data ?? Data()) {
                     handler(.success(model))
                 }
-
+                handler(.failure(NSError(domain: "test.com", code: 0, userInfo: ["why":"json"])))
             }
         }
     }
