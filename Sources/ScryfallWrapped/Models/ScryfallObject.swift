@@ -10,4 +10,5 @@ public enum ScryfallObject: String, Codable {
     case cardFace = "card_face"
     case set
     case ruling
+    case error
 }

@@ -16,15 +16,20 @@ public extension URLSession {
             if let error = error {
                 handler(.failure(error))
             } else {
-                do {
-                    let model = try JSONDecoder().decode(expectedType, from: data ?? Data())
-                    handler(.success(model))
-                } catch {
-                    handler(.failure(error))
-                }
-
-
+                self.decodeData(data ?? Data(), expectedType: expectedType, handler: handler)
             }
+        }
+    }
+
+    private func decodeData<T>(_ data: Data, expectedType: T.Type, handler: @escaping Handler<T>) {
+        do {
+            let model = try JSONDecoder().decode(expectedType, from: data)
+            handler(.success(model))
+        } catch {
+            if let scryfallError = try? JSONDecoder().decode(ScryfallError.self, from: data) {
+                handler(.failure(scryfallError))
+            }
+            handler(.failure(error))
         }
     }
     
