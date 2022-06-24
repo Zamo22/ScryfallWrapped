@@ -34,7 +34,7 @@ public extension URLSession {
     }
     
     @discardableResult
-    func endpointRequest<T: Codable>(
+    internal func endpointRequest<T: Codable>(
         _ endpoint: Endpoint,
         expectedType: T.Type,
         then handler: @escaping Handler<T>

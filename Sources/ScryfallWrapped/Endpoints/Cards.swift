@@ -4,16 +4,15 @@
 
 import Foundation
 
-public extension Endpoint {
-    /// Returns a paginated card list matching a defined search predicate with additonal ordering and filtering options
+extension Endpoint {
     static func cards(searchedBy query: String,
-                      unique: UniqueCardType? = nil,
-                      order: CardSortOrder? = nil,
-                      sortDirection: SortDirection? = nil,
-                      includeExtras: Bool? = nil,
-                      includeMultilingual: Bool? = nil,
-                      includeVariations: Bool? = nil,
-                      page: Int? = nil
+                      unique: UniqueCardType?,
+                      order: CardSortOrder?,
+                      sortDirection: SortDirection?,
+                      includeExtras: Bool?,
+                      includeMultilingual: Bool?,
+                      includeVariations: Bool?,
+                      page: Int?
     ) -> Self {
         Endpoint(path: Constants.Endpoints.Cards.searchEndpoint,
                  queryItems: [URLQueryItem(name: Constants.Endpoints.Cards.queryKey, value: query),
@@ -30,21 +29,19 @@ public extension Endpoint {
                               URLQueryItem(name: Constants.Endpoints.Cards.pageKey, value: page?.nullableString)])
     }
 
-    /// Returns a card object exactly matching the name provided
     static func card(namedExactly name: String,
-                     setCode: String? = nil,
-                     imageVersion: ImageVersion? = nil,
-                     backFaceOfCard: Bool = false
+                     setCode: String?,
+                     imageVersion: ImageVersion?,
+                     backFaceOfCard: Bool
     ) -> Self {
         cardNamed(exactly: name, fuzzy: nil, setCode: setCode,
                   imageVersion: imageVersion, backFaceOfCard: backFaceOfCard)
     }
 
-    /// Returns a card object when a `fuzzy` name is provided. Only returns a card if there is an unambigious match for the card.
     static func card(withPartialName name: String,
-                     setCode: String? = nil,
-                     imageVersion: ImageVersion? = nil,
-                     backFaceOfCard: Bool = false
+                     setCode: String?,
+                     imageVersion: ImageVersion?,
+                     backFaceOfCard: Bool
     ) -> Self {
         cardNamed(exactly: nil, fuzzy: name, setCode: setCode,
                   imageVersion: imageVersion, backFaceOfCard: backFaceOfCard)
@@ -67,18 +64,16 @@ public extension Endpoint {
         return Endpoint(path: Constants.Endpoints.Cards.namedEndpoint, queryItems: queryItems)
     }
 
-    /// Returns a catalog of card objects that are autocompleted based on a query
-    static func autocompleteCard(for query: String, includeExtras: Bool? = nil) -> Self {
+    static func autocompleteCard(for query: String, includeExtras: Bool?) -> Self {
         Endpoint(path: Constants.Endpoints.Cards.autocompleteEndpoint,
                  queryItems: [URLQueryItem(name: Constants.Endpoints.Cards.queryKey, value: query),
                               URLQueryItem(name: Constants.Endpoints.Cards.extrasKey,
                                            value: includeExtras?.nullableString)])
     }
 
-    /// Returns a random card object from the magic database, query parameters can be used to add restrictions
-    static func randomCard(query: String? = nil,
-                           imageVersion: ImageVersion? = nil,
-                           backFaceOfCard: Bool = false
+    static func randomCard(query: String?,
+                           imageVersion: ImageVersion?,
+                           backFaceOfCard: Bool
     ) -> Self {
         Endpoint(path: Constants.Endpoints.Cards.randomEndpoint,
                  queryItems: [URLQueryItem(name: Constants.Endpoints.Cards.queryKey, value: query),
@@ -91,48 +86,46 @@ public extension Endpoint {
 }
 
 // MARK: - Card request options
-public extension Endpoint {
-    enum UniqueCardType: String {
-        /// Default. Removes duplicate gameplay objects (cards that share a name and have the same functionality)
-        case cards
+public enum UniqueCardType: String {
+    /// Default. Removes duplicate gameplay objects (cards that share a name and have the same functionality)
+    case cards
 
-        /// Returns only one copy of each unique artwork for matching cards.
-        case art
+    /// Returns only one copy of each unique artwork for matching cards.
+    case art
 
-        /// Returns all prints for all cards matched (disables rollup)
-        case prints
-    }
+    /// Returns all prints for all cards matched (disables rollup)
+    case prints
+}
 
-    enum SortDirection: String {
-        case auto
-        case ascending = "asc"
-        case descending = "desc"
-    }
+public enum SortDirection: String {
+    case auto
+    case ascending = "asc"
+    case descending = "desc"
+}
 
-    enum CardSortOrder: String {
-        case name
-        case set
-        case released
-        case rarity
-        case color
-        case usdPrice = "usd"
-        case tixPrice = "tix"
-        case eurPrice = "eur"
-        case cmc
-        case power
-        case toughness
-        case edhrecRanking = "edhrec"
-        case pennyRanking = "penny"
-        case artist
-        case review
-    }
+public enum CardSortOrder: String {
+    case name
+    case set
+    case released
+    case rarity
+    case color
+    case usdPrice = "usd"
+    case tixPrice = "tix"
+    case eurPrice = "eur"
+    case cmc
+    case power
+    case toughness
+    case edhrecRanking = "edhrec"
+    case pennyRanking = "penny"
+    case artist
+    case review
+}
 
-    enum ImageVersion: String {
-        case small
-        case normal
-        case large
-        case png
-        case artCrop = "art_crop"
-        case borderCrop = "border_crop"
-    }
+public enum ImageVersion: String {
+    case small
+    case normal
+    case large
+    case png
+    case artCrop = "art_crop"
+    case borderCrop = "border_crop"
 }

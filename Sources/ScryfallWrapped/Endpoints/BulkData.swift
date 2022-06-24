@@ -4,7 +4,7 @@
 
 import Foundation
 
-public extension Endpoint {
+extension Endpoint {
     /// Retrieve all bulk data objects
     static var bulkData: Self {
         Endpoint(path: Constants.Endpoints.BulkData.endpoint)
@@ -22,7 +22,7 @@ public extension Endpoint {
 }
 
 // MARK: - Bulk data request options
-public extension Endpoint {
+extension Endpoint {
     enum BulkDataType: String {
         /// A JSON file containing one Scryfall card object for each Oracle ID on Scryfall.
         case oracle = "oracle_cards"

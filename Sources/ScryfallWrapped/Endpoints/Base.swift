@@ -6,11 +6,11 @@
 
 import Foundation
 
-public struct Endpoint {
-    public var path: String
-    public var queryItems: [URLQueryItem] = []
+struct Endpoint {
+    var path: String
+    var queryItems: [URLQueryItem] = []
 
-    public var url: URL {
+    var url: URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = Constants.Endpoints.baseUrl
