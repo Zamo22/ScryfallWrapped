@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Ruling: Codable {
+public struct MagicRuling: Codable {
     public let object: ScryfallObject
     /// RulingSource object indicating whether the ruling came from Wizards of the coast or Scryfall
     public let source: RulingSource

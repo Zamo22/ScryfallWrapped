@@ -4,7 +4,7 @@
 
 import Foundation
 
-public extension URLSession {
+extension URLSession {
     typealias Handler<T: Codable> = (Result<T, Error>) -> Void
 
     private func dataTask<T: Codable>(
@@ -34,7 +34,7 @@ public extension URLSession {
     }
     
     @discardableResult
-    internal func endpointRequest<T: Codable>(
+    func endpointRequest<T: Codable>(
         _ endpoint: Endpoint,
         expectedType: T.Type,
         then handler: @escaping Handler<T>

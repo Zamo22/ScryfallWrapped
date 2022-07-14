@@ -79,8 +79,7 @@ public struct Cards {
                             setCode code: String? = nil,
                             imageVersion: ImageVersion? = nil,
                             backFaceOfCard showBack: Bool = false,
-                            completionHandler: @escaping singleCardResult
-    ) {
+                            completionHandler: @escaping singleCardResult) {
         URLSession.shared.endpointRequest(.card(withPartialName: name, setCode: code, imageVersion: imageVersion,
                                                 backFaceOfCard: showBack),
                                           expectedType: MagicCard.self, then: completionHandler)
@@ -95,13 +94,78 @@ public struct Cards {
     }
 
     /// Returns a random card object from the magic database, query parameters can be used to add restrictions
-    static func randomCard(query: String? = nil,
-                           imageVersion: ImageVersion? = nil,
-                           backFaceOfCard showBack: Bool = false,
-                           completionHandler: @escaping singleCardResult
-    ) {
+    public static func randomCard(query: String? = nil,
+                                  imageVersion: ImageVersion? = nil,
+                                  backFaceOfCard showBack: Bool = false,
+                                  completionHandler: @escaping singleCardResult) {
         URLSession.shared.endpointRequest(.randomCard(query: query, imageVersion: imageVersion,
                                                       backFaceOfCard: showBack),
                                           expectedType: MagicCard.self, then: completionHandler)
+    }
+}
+
+public struct Rulings {
+    public typealias rulingsListResult = (Result<ScryfallList<MagicRuling>, Error>) -> Void
+
+    /// Returns a List of rulings for a card with the given Multiverse ID. If the card has multiple multiverse IDs, this method can find either of them
+    public func rulings(forMultiverseCardId id: String,
+                        completionHandler: @escaping rulingsListResult) {
+        URLSession.shared.endpointRequest(.rulings(withMultiverseId: id),
+                                          expectedType: ScryfallList<MagicRuling>.self,
+                                          then: completionHandler)
+    }
+
+    /// Returns rulings for a card with the given MTGO ID (also known as the Catalog ID). The ID can either be the card’s mtgo_id or its mtgo_foil_id
+    public func rulings(forMagicOnlineId id: String,
+                        completionHandler: @escaping rulingsListResult) {
+        URLSession.shared.endpointRequest(.rulings(withMtgoId: id),
+                                          expectedType: ScryfallList<MagicRuling>.self,
+                                          then: completionHandler)
+    }
+
+    /// Returns rulings for a card with the given Magic: The Gathering Arena ID
+    public func rulings(forArenaId id: String,
+                        completionHandler: @escaping rulingsListResult) {
+        URLSession.shared.endpointRequest(.rulings(withArenaId: id),
+                                          expectedType: ScryfallList<MagicRuling>.self,
+                                          then: completionHandler)
+    }
+
+    /// Returns a List of rulings for the card with the given set code and collector number
+    public func rulings(forCardNumber card: String, andSet set: String,
+                        completionHandler: @escaping rulingsListResult) {
+        URLSession.shared.endpointRequest(.rulings(forCard: card, withSet: set),
+                                          expectedType: ScryfallList<MagicRuling>.self,
+                                          then: completionHandler)
+    }
+
+    /// Returns a List of rulings for a card with the given Scryfall ID
+    public func rulings(forScryfallId id: String,
+                        completionHandler: @escaping rulingsListResult) {
+        URLSession.shared.endpointRequest(.rulings(withScryfallId: id),
+                                          expectedType: ScryfallList<MagicRuling>.self,
+                                          then: completionHandler)
+    }
+}
+
+public struct BulkData {
+    public typealias bulkDataListResult = (Result<ScryfallList<BulkDataModel>, Error>) -> Void
+    public typealias bulkDataResult = (Result<BulkDataModel, Error>) -> Void
+
+    public func getAllBulkData(completionHandler: @escaping bulkDataListResult) {
+        URLSession.shared.endpointRequest(.bulkData, expectedType: ScryfallList<BulkDataModel>.self,
+                                          then: completionHandler)
+    }
+    
+    public func getBulkData(byId id: String, completionHandler: @escaping bulkDataResult) {
+        URLSession.shared.endpointRequest(.bulkData(byId: id),
+                                          expectedType: BulkDataModel.self,
+                                          then: completionHandler)
+    }
+
+    public func getBulkData(byType type: BulkDataType, completionHandler: @escaping bulkDataResult) {
+        URLSession.shared.endpointRequest(.bulkData(byType: type),
+                                          expectedType: BulkDataModel.self,
+                                          then: completionHandler)
     }
 }

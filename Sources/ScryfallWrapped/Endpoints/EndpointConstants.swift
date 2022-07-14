@@ -36,6 +36,14 @@ extension Constants {
             static let imageVersionKey = "version"
         }
 
+        enum Rulings {
+            static let cardsConstant = "cards"
+            static let multiversePath = "\(cardsConstant)/multiverse/"
+            static let mtgoPath = "\(cardsConstant)/mtgo/"
+            static let arenaPath = "\(cardsConstant)/arena/"
+            static let rulingsConstant = "rulings"
+        }
+
         enum BulkData {
             static let endpoint = "bulk-data"
         }
