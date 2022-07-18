@@ -138,7 +138,7 @@ public struct MagicCard: Codable, Hashable {
     public let promoTypes: [String]?
     /// A dictionary providing URIs to this card’s listing on major marketplaces
     // TODO: Check if this dictionary works as expected
-    public let purchaseUris: [String: String]
+    public let purchaseUris: [String: String]?
     /// This card's rarity
     public let rarity: CardRarity
     /// An dictionary providing URIs to this card’s listing on other Magic: The Gathering online resources
