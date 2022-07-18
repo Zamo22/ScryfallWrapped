@@ -95,7 +95,7 @@ public struct MagicCard: Codable, Hashable {
     /// This card’s border color
     public let borderColor: CardBorderColor
     /// The Scryfall ID for the card back design present on this card
-    public let cardBackId: UUID
+    public let cardBackId: UUID?
     /// This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★
     public let collectorNumber: String
     /// True if you should consider avoiding use of this print downstream
