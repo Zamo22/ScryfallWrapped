@@ -10,6 +10,7 @@ public enum Color: String, Codable {
     case black = "B"
     case red   = "R"
     case green = "G"
+    case colorless = "C"
 }
 
 public struct FormatLegalities: Codable, Hashable {
