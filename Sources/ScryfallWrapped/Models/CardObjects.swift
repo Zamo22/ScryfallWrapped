@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct RelatedCard: Codable {
+public struct RelatedCard: Codable, Hashable {
     public let object: ScryfallObject
     /// A unique ID for this card in Scryfall’s database.
     public let id: UUID
@@ -31,7 +31,7 @@ public struct RelatedCard: Codable {
     }
 }
 
-public struct CardFace: Codable {
+public struct CardFace: Codable, Hashable {
     public let object: ScryfallObject
     /// The name of the illustrator of this card face. Newly spoiled cards may not have this field yet
     public let artist: String?
@@ -90,7 +90,7 @@ public struct CardFace: Codable {
     }
 }
 
-public struct CardImageUris: Codable {
+public struct CardImageUris: Codable, Hashable {
     /// A transparent, rounded full card PNG. This is the best image to use for videos or other high-quality content.
     public let png: String?
     /// A full card image with the rounded corners and the majority of the border cropped off. Designed for dated contexts where rounded images can’t be used.
@@ -218,13 +218,13 @@ public enum Frame: String, Codable {
     case future
 }
 
-public enum CardImageStatus: String, Codable {
+public enum CardImageStatus: String, Codable, Hashable {
     case missing, placeholder
     case lowResolution = "lowres"
     case highResolutionScan = "highres_scan"
 }
 
-public struct CardPrices: Codable {
+public struct CardPrices: Codable, Hashable {
     public let usd: String?
     public let usdFoil: String?
     public let usdEtched: String?

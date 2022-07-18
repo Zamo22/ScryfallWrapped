@@ -152,17 +152,20 @@ public struct BulkData {
     public typealias bulkDataListResult = (Result<ScryfallList<BulkDataModel>, Error>) -> Void
     public typealias bulkDataResult = (Result<BulkDataModel, Error>) -> Void
 
+    /// Returns a List of all Bulk Data items on Scryfall
     public func getAllBulkData(completionHandler: @escaping bulkDataListResult) {
         URLSession.shared.endpointRequest(.bulkData, expectedType: ScryfallList<BulkDataModel>.self,
                                           then: completionHandler)
     }
-    
+
+    /// Returns a single Bulk Data object with the given id
     public func getBulkData(byId id: String, completionHandler: @escaping bulkDataResult) {
         URLSession.shared.endpointRequest(.bulkData(byId: id),
                                           expectedType: BulkDataModel.self,
                                           then: completionHandler)
     }
 
+    /// Returns a single Bulk Data object with the given `BulkDataType`
     public func getBulkData(byType type: BulkDataType, completionHandler: @escaping bulkDataResult) {
         URLSession.shared.endpointRequest(.bulkData(byType: type),
                                           expectedType: BulkDataModel.self,

@@ -12,7 +12,7 @@ public enum Color: String, Codable {
     case green = "G"
 }
 
-public struct FormatLegalities: Codable {
+public struct FormatLegalities: Codable, Hashable {
     public let standard: Legality
     public let future: Legality
     public let historic: Legality

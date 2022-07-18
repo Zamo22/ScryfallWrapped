@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct MagicCard: Codable {
+public struct MagicCard: Codable, Hashable {
     // MARK: - Core fields
     public let object: ScryfallObject
 
@@ -248,5 +248,3 @@ public struct MagicCard: Codable {
         case previewSourceName = "preview.source"
     }
 }
-
-
