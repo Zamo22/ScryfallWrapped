@@ -45,5 +45,5 @@ public enum Games: String, Codable {
 }
 
 public enum CardRarity: String, Codable {
-    case common, uncommon, rare, mythic, bonus
+    case common, uncommon, rare, mythic, bonus, special
 }
