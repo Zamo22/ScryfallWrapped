@@ -7,7 +7,7 @@ import Foundation
 public struct ScryfallList<DataType: Codable>: Codable {
     public let data: [DataType]
     /// True if this List is paginated and there is a page beyond the current page
-    public let hasMore: Bool
+    public let hasMore: Bool?
     /// If there is a page beyond the current page, this field will contain a full API URI to that page
     public let nextPage: String?
     /// If this is a list of Card objects, this field will contain the total number of cards found across all pages
